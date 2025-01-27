@@ -1,38 +1,84 @@
-AVANT DE COMMENCER A BOSSER ACTIVE LE VENV
+Projet : IA Génétique pour Jeu Vidéo 2D
 
-    source ia_game_project-env/bin/activate
+Ce projet implémente une Intelligence Artificielle (IA) basée sur un algorithme génétique utilisant la librairie NEAT (NeuroEvolution of Augmenting Topologies).
+L'objectif est de permettre à une IA d'apprendre à jouer à un jeu 2D en s'améliorant de génération en génération grâce à un processus évolutif.
 
-Pour revoir les explications sur mask ( intervient dans la gestion des collisions ) revenir a la 57:00 de 'Python Platformer Tutorial' de Tech with Tim
+🛠️ Environnement requis
 
+    Python : version 3.10 ou supérieure
 
-Prochaine fois, reprendre avec la video 'Python Platformer Tutorial' de Tech with Tim a la 1:37:30
+📦 Dépendances :
 
+    Pygame : pour gérer la structure et les interactions dans le jeu.
+    NEAT-Python : pour l'évolution génétique des réseaux de neurones.
 
+Installez les dépendances via :
 
+    pip install pygame neat-python
 
-SPRITES = load_sprite_sheets("MainCharacters", "PinkMan", 32, 32, True)
+📂 Structure du projet
 
-laod_sprite_sheet("MainCharacters", "Loading", width, height, direction=false)
+    .
+    |-- assets/               # Dossier contenant les fichiers et ressources du jeu (images, arrière-plans, etc.)
+    |-- second.py             # Script principal où l'algorithme génétique est implémenté
+    |-- config-neat.txt       # Fichier de configuration pour NEAT (paramètres génétiques et réseau)
 
+🚀 Fonctionnalités principales
 
-Bibliograhie :
+    Définition des classes du jeu :
+    Utilisation de Pygame pour modéliser les entités du jeu (joueur, objets, environnements).
 
-    Python
+    Classe Game :
+    Fournit un environnement simulé où les génomes peuvent être évalués.
 
-        pygame
-            
+    Évaluation d'un génome (eval_genom) :
+        Chaque génome est testé dans une instance du jeu.
+        Le score (fitness) est attribué en fonction des performances du génome (collecte d'objets, évitement des obstacles, progression dans le niveau).
 
+    Évaluation d'une population (eval_genomes) :
+        Tous les génomes d'une génération sont évalués.
+        Utilisation de multiprocessing pour accélérer l'évaluation en parallèle.
 
-    Algorithme génétique
+    Entraînement et évolution (run_neat) :
+        Initialisation d'une population de génomes.
+        Entraînement sur plusieurs générations.
+        Sauvegarde du meilleur génome sous forme d'un fichier pickle (winner.pkl).
 
-        La Base bien sur : 
-            https://fr.wikipedia.org/wiki/Algorithme_g%C3%A9n%C3%A9tique
+    Test du génome gagnant :
+        Permet de charger et tester le génome ayant obtenu le meilleur score après l'entraînement.
 
-        Operateurs d'évolutions
-            http://igm.univ-mlv.fr/~dr/XPOSE2013/tleroux_genetic_algorithm/fonctionnement.html
+⚙️ Utilisation :
 
-        https://www.i2m.univ-amu.fr/perso/jean-philippe.preaux/PDF/pdf_proteges/OptimisationCombinatoire/Metaheuristiques3.pdf
+1️⃣ Configuration de NEAT
 
-        Reprend les deux précedents en un peu pkus clair : 
-            https://accromath.uqam.ca/2019/10/algorithmes-genetiques/
+    Ajustez les paramètres génétiques dans le fichier config-neat.txt (nombre de neurones, mutations, stagnation, etc.).
+
+2️⃣ Lancer l'entraînement
+
+Exécutez le script principal pour démarrer l'entraînement de l'IA :
+
+python second.py
+
+3️⃣ Tester le génome gagnant
+
+Une fois l'entraînement terminé, le génome gagnant est sauvegardé dans winner.pkl. Chargez ce génome pour observer ses performances dans le jeu.
+📈 Optimisation du Fitness
+
+Le score (fitness) de chaque génome est calculé en fonction :
+
+    Des objets collectés (exemple : pommes).
+    Du niveau atteint (progresser dans le jeu augmente la fitness).
+    Des erreurs commises (chutes ou collisions réduisent la fitness).
+
+🖼️ Améliorations possibles
+
+    Utiliser les niveaux généré aléatoirement en y ajoutant des obstacles pour enrichir l'apprentissage de l'IA.
+    Ajuster les paramètres de mutation et croisement pour améliorer l'évolution.
+    Visualiser en temps réel les décisions de l'IA (debugging).
+
+🧠 Inspiration
+
+Ce projet démontre comment utiliser un algorithme génétique pour entraîner une IA à jouer à un jeu simple.
+NEAT est particulièrement puissant pour concevoir des réseaux de neurones capables d'apprendre des tâches complexes de manière autonome.
+
     
